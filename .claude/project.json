@@ -1,0 +1,31 @@
+{
+  "id": "rsvp-reader",
+  "name": "RSVP Reader",
+  "description": "Rapid Serial Visual Presentation reader for EPUB books",
+  "path": "/Users/shaka/rsvp-reader",
+  "status": "in-progress",
+  "techStack": [
+    "Next.js 16.1.3",
+    "React 19.2.3",
+    "TypeScript 5",
+    "Tailwind CSS 4",
+    "Dexie 4.2.1",
+    "EPUBJS 0.3.93"
+  ],
+  "pipeline": {
+    "stage": "development",
+    "progress": 65,
+    "phases": {
+      "planning": "done",
+      "design": "done",
+      "development": "in-progress",
+      "testing": "pending",
+      "deployment": "pending",
+      "maintenance": "pending"
+    }
+  },
+  "currentFocus": "UI/UX overhaul: Book cards, upload area, header, library features, mobile infrastructure",
+  "blockers": [],
+  "createdAt": "2026-01-16",
+  "updatedAt": "2026-01-16"
+}

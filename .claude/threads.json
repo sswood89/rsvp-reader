@@ -1,0 +1,67 @@
+{
+  "threads": [
+    {
+      "threadId": "rsvp-reader-2026-01-16-core-fixes",
+      "date": "2026-01-16",
+      "title": "Core Functionality Fixes",
+      "context": "Fixed EPUB extraction, timing engine, UI overhaul",
+      "outcome": "success",
+      "summary": "Major session addressing core functionality issues. Fixed EPUB text extraction by properly handling HTMLHtmlElement types. Resolved timing cascade bug that was causing instant reads. Added word length timing adjustments for more natural reading pace. Fixed chapter change index reset issue. Completed UI cosmetic overhaul. Lowered default WPM from 300 to 250 for better readability. Increased punctuation pauses for natural sentence flow.",
+      "tasksCompleted": [
+        "Fixed EPUB text extraction (HTMLHtmlElement handling)",
+        "Fixed timing cascade bug causing instant reads",
+        "Added word length timing adjustments",
+        "Fixed chapter change index reset",
+        "UI cosmetic overhaul",
+        "Lowered default WPM to 250",
+        "Increased punctuation pauses"
+      ],
+      "tasksCreated": [
+        "Design revamp for focused reading",
+        "Implement position tracking"
+      ],
+      "filesModified": [],
+      "createdAt": "2026-01-16",
+      "updatedAt": "2026-01-16"
+    },
+    {
+      "threadId": "rsvp-reader-2026-01-16-design-system-tracking",
+      "date": "2026-01-16",
+      "title": "Design System & Position Tracking",
+      "context": "Implement focus-optimized design and position tracking system",
+      "outcome": "success",
+      "summary": "Implemented comprehensive focus-optimized design system with Atkinson Hyperlegible font, 3 themes (dark, light, sepia), zen mode for distraction-free reading, and ORP guide. Added position tracking with auto-save every 5 words, sentence navigation ([ and ] keys), context preview when paused, and resume marker for returning readers. Created detailed plan for UI/UX overhaul covering book cards, upload area, header, themes, library features, and mobile infrastructure (PWA + Capacitor).",
+      "tasksCompleted": [
+        "Implemented Atkinson Hyperlegible font for readability",
+        "Created 3-theme system (dark, light, sepia) with CSS variables",
+        "Added zen mode that fades controls during playback",
+        "Implemented ORP (Optimal Recognition Point) guide",
+        "Built position tracking with auto-save every 5 words",
+        "Added sentence navigation (jumpToPreviousSentence, jumpToNextSentence)",
+        "Created ContextPreview component showing current sentence when paused",
+        "Built ResumeMarker component for returning readers",
+        "Created comprehensive UI/UX overhaul plan"
+      ],
+      "tasksCreated": [
+        "Book cards visual hierarchy (hover effects, progress bars)",
+        "Upload area redesign (glass morphism, drag states)",
+        "Sticky header with blur effect",
+        "Enhanced color palette and elevation system",
+        "Library view controls (grid/list, sort, filter)",
+        "PWA setup with service worker",
+        "Capacitor setup for native mobile apps"
+      ],
+      "filesModified": [
+        "src/app/globals.css",
+        "src/hooks/useRsvpEngine.ts",
+        "src/hooks/useReadingState.ts",
+        "src/components/reader/RsvpReader.tsx",
+        "src/components/reader/RsvpDisplay.tsx",
+        "src/components/reader/ContextPreview.tsx",
+        "src/components/reader/ResumeMarker.tsx"
+      ],
+      "createdAt": "2026-01-16",
+      "updatedAt": "2026-01-16"
+    }
+  ]
+}

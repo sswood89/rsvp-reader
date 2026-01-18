@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useState, useEffect, useCallback, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { Word } from '@/lib/types/book';
 import { parseTextInput, TextContent } from '@/services/text/textInput';
 import { RsvpReader } from '@/components/reader/RsvpReader';
@@ -13,8 +13,7 @@ import Link from 'next/link';
 // Session storage key for text content
 const TEXT_STORAGE_KEY = 'rsvp-quick-read-text';
 
-export default function QuickReadPage() {
-  const router = useRouter();
+function QuickReadContent() {
   const searchParams = useSearchParams();
   const [words, setWords] = useState<Word[]>([]);
   const [content, setContent] = useState<TextContent | null>(null);
@@ -131,5 +130,24 @@ export default function QuickReadPage() {
         </div>
       </footer>
     </div>
+  );
+}
+
+function LoadingFallback() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+      <div className="flex flex-col items-center gap-4">
+        <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
+        <p className="text-gray-600 dark:text-gray-400">Loading...</p>
+      </div>
+    </div>
+  );
+}
+
+export default function QuickReadPage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <QuickReadContent />
+    </Suspense>
   );
 }
