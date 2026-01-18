@@ -1,26 +1,322 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant sepia (&:where(.sepia, .sepia *));
+
+/* Light Theme (default) */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fafafa;
+  --background-elevated: #ffffff;
+  --foreground: #1a1a1a;
+  --foreground-primary: #1a1a1a;
+  --foreground-secondary: #525252;
+  --orp-highlight: #dc2626;
+  --control-bg: #f4f4f5;
+  --control-bg-hover: #e4e4e7;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --accent-primary: #3b82f6;
+  --accent-primary-alpha: rgba(59, 130, 246, 0.1);
+  --skeleton-base: #e5e7eb;
+  --skeleton-highlight: #f3f4f6;
+}
+
+/* Dark Theme */
+.dark {
+  --background: #1a1a1a;
+  --background-elevated: #222222;
+  --foreground: #e0e0e0;
+  --foreground-primary: #e0e0e0;
+  --foreground-secondary: #a0a0a0;
+  --orp-highlight: #ff4444;
+  --control-bg: #2a2a2a;
+  --control-bg-hover: #333333;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --accent-primary: #60a5fa;
+  --accent-primary-alpha: rgba(96, 165, 250, 0.15);
+  --skeleton-base: #374151;
+  --skeleton-highlight: #4b5563;
+}
+
+/* Sepia Theme */
+.sepia {
+  --background: #f4ecd8;
+  --background-elevated: #faf6ed;
+  --foreground: #3d3229;
+  --foreground-primary: #3d3229;
+  --foreground-secondary: #6b5d4d;
+  --orp-highlight: #c94c4c;
+  --control-bg: #e8dfc8;
+  --control-bg-hover: #d9cfb8;
+  --border-color: rgba(61, 50, 41, 0.15);
+  --accent-primary: #b45309;
+  --accent-primary-alpha: rgba(180, 83, 9, 0.1);
+  --skeleton-base: #d9cfb8;
+  --skeleton-highlight: #e8dfc8;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-background-elevated: var(--background-elevated);
   --color-foreground: var(--foreground);
+  --color-foreground-secondary: var(--foreground-secondary);
+  --color-orp-highlight: var(--orp-highlight);
+  --color-control-bg: var(--control-bg);
+  --color-control-bg-hover: var(--control-bg-hover);
+  --color-border: var(--border-color);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-reader: var(--font-atkinson);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Smooth transitions for theme changes */
+html {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* RSVP Display Typography */
+.rsvp-word {
+  font-family: var(--font-atkinson), system-ui, sans-serif;
+  font-size: clamp(48px, 8vw, 72px);
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 640px) {
+  .rsvp-word {
+    font-size: clamp(32px, 10vw, 48px);
+  }
+}
+
+/* Zen mode - controls fade during playback */
+.zen-mode-controls {
+  transition: opacity 0.3s ease;
+}
+
+.zen-mode-active .zen-mode-controls {
+  opacity: 0.3;
+}
+
+.zen-mode-active .zen-mode-controls:hover,
+.zen-mode-active .zen-mode-controls:focus-within {
+  opacity: 1;
+}
+
+/* ORP alignment guide */
+.orp-guide {
+  width: 2px;
+  background-color: var(--orp-highlight);
+  opacity: 0.2;
+}
+
+/* Custom scrollbar for dark mode */
+.dark ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #222222;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* Custom scrollbar for sepia mode */
+.sepia ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.sepia ::-webkit-scrollbar-track {
+  background: #e8dfc8;
+}
+
+.sepia ::-webkit-scrollbar-thumb {
+  background: #c9bfa8;
+  border-radius: 4px;
+}
+
+.sepia ::-webkit-scrollbar-thumb:hover {
+  background: #b5a890;
+}
+
+/* ========================================
+   Animation Keyframes & Utilities
+   ======================================== */
+
+/* Fade in from bottom animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Scale in animation */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Ripple effect animation */
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Subtle pulse for interactive elements */
+@keyframes subtlePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+/* Animation utility classes */
+.animate-fade-in-up {
+  animation: fadeInUp 0.4s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s ease-out forwards;
+}
+
+/* Stagger animation delays (for grid items) */
+.stagger-1 { animation-delay: 0ms; }
+.stagger-2 { animation-delay: 50ms; }
+.stagger-3 { animation-delay: 100ms; }
+.stagger-4 { animation-delay: 150ms; }
+.stagger-5 { animation-delay: 200ms; }
+.stagger-6 { animation-delay: 250ms; }
+.stagger-7 { animation-delay: 300ms; }
+.stagger-8 { animation-delay: 350ms; }
+.stagger-9 { animation-delay: 400ms; }
+.stagger-10 { animation-delay: 450ms; }
+.stagger-11 { animation-delay: 500ms; }
+.stagger-12 { animation-delay: 550ms; }
+
+/* CSS custom property based stagger (more flexible) */
+.animate-stagger {
+  animation: fadeInUp 0.4s ease-out forwards;
+  animation-delay: calc(var(--stagger-index, 0) * 60ms);
+  opacity: 0;
+}
+
+/* Ripple effect container */
+.ripple-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  background-color: currentColor;
+  opacity: 0.3;
+  pointer-events: none;
+  animation: ripple 0.6s ease-out forwards;
+}
+
+/* Page transition wrapper */
+.page-transition {
+  animation: fadeIn 0.25s ease-out;
+}
+
+/* Hover lift effect for cards */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
+}
+
+.dark .hover-lift:hover {
+  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.4);
+}
+
+/* Smooth content transitions */
+.content-transition {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Interactive press effect */
+.press-effect {
+  transition: transform 0.1s ease;
+}
+
+.press-effect:active {
+  transform: scale(0.98);
+}
+
+/* ========================================
+   Skeleton Loading Animation
+   ======================================== */
+
+/* Skeleton shimmer animation */
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--skeleton-base) 0%,
+    var(--skeleton-base) 40%,
+    var(--skeleton-highlight) 50%,
+    var(--skeleton-base) 60%,
+    var(--skeleton-base) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
 }
